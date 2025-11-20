@@ -144,7 +144,7 @@ export function HomeClient({ products }: HomeClientProps) {
                     price={product.price}
                     calories={0}
                     image={product.image}
-                    onAddToCart={undefined}
+                    onAddToCart={handleAddToCart}
                   />
                 </div>
               ))}

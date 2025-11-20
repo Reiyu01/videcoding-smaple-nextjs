@@ -100,11 +100,6 @@ export function DrinkCard({
             加入購物車
           </button>
         )}
-        {!onAddToCart && (
-          <div className="w-full bg-gray-100 text-gray-700 rounded-lg font-semibold py-2 text-center">
-            點擊查看詳情
-          </div>
-        )}
       </div>
     </div>
   );

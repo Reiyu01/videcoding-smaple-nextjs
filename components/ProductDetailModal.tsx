@@ -29,29 +29,20 @@ export function ProductDetailModal({
   const [quantity, setQuantity] = useState(1);
   const [isFavorited, setIsFavorited] = useState(false);
   const [notes, setNotes] = useState('');
-  const [isAdding, setIsAdding] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleAddToCart = async () => {
-    if (isAdding) return; // 防止重複點擊
-    
-    setIsAdding(true);
-    try {
-      onAddToCart({
-        id: product.id,
-        name: product.nameZh || product.name,
-        price: product.price,
-        quantity,
-        notes,
-      });
-      // 重置狀態
-      setQuantity(1);
-      setNotes('');
-      onClose();
-    } finally {
-      setIsAdding(false);
-    }
+  const handleAddToCart = () => {
+    onAddToCart({
+      id: product.id,
+      name: product.nameZh || product.name,
+      price: product.price,
+      quantity,
+      notes,
+    });
+    // 重置數量但保持詳情打開，讓用戶可以繼續添加
+    setQuantity(1);
+    setNotes('');
   };
 
   return (
@@ -157,11 +148,10 @@ export function ProductDetailModal({
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              disabled={isAdding}
-              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 rounded-lg transition-all active:scale-95 flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 rounded-lg transition-all active:scale-95 flex items-center justify-center gap-2"
             >
               <ShoppingCart size={20} />
-              {isAdding ? '加入中...' : '加入購物車'}
+              加入購物車
             </button>
 
             {/* Continue Shopping */}
