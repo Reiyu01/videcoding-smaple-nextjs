@@ -88,13 +88,23 @@ export function DrinkCard({
         </div>
 
         {/* Add to Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-semibold py-2 transition-all flex items-center justify-center gap-2 active:scale-95 active:bg-blue-700"
-        >
-          <ShoppingCart size={18} />
-          加入購物車
-        </button>
+        {onAddToCart && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAddToCart();
+            }}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-semibold py-2 transition-all flex items-center justify-center gap-2 active:scale-95 active:bg-blue-700"
+          >
+            <ShoppingCart size={18} />
+            加入購物車
+          </button>
+        )}
+        {!onAddToCart && (
+          <div className="w-full bg-gray-100 text-gray-700 rounded-lg font-semibold py-2 text-center">
+            點擊查看詳情
+          </div>
+        )}
       </div>
     </div>
   );
